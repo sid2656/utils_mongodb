@@ -19,7 +19,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import utils.db.mongodb.init.InitMongo;
 import utils.db.mongodb.utils.BeanUtil;
-import utils.utils.DataUtils;
+import utils.utils.DataTypeUtil;
 import utils.utils.LogUtil;
 
 import com.mongodb.BasicDBList;
@@ -89,7 +89,7 @@ public class MongodbUtil {
 		if (mg==null) {
 			try {
 				List<ServerAddress> addresses = new ArrayList<ServerAddress>();
-				if (DataUtils.isNotEmpty(InitMongo.SERVER_HOSTS)) {
+				if (DataTypeUtil.isNotEmpty(InitMongo.SERVER_HOSTS)) {
 					isShard = true;
 					LogUtil.getInstance().getLogger(this.getClass()).info("-----启动集群分片数据库：{}",InitMongo.SERVER_HOSTS);
 					String[] list = InitMongo.SERVER_HOSTS.split(",");
