@@ -1,0 +1,21 @@
+use config
+db.setting.update({"balancer": 1}, {"_id": "db_name.collection_name"}, {$set: {stopped:true}}, true)
+use db_name
+db.dropDatabase()
+
+
+由于某些原因导致分片集合无法存储数据时，请采用一下方式删除分片，
+然后让程序来自动创建分片库和分片集合。
+
+删除分片数据包含两方面的删除
+1.集合分片的删除
+在config库中：
+找到chunks集合；找到库名.集合对应的分块信息，具体包含几条按分片数量确定
+将找到的记录删除
+
+2.库文件信息的删除
+在config库中：
+database库中删除想要去除的数据库记录后，
+再在图形终端界面删掉整个库
+
+

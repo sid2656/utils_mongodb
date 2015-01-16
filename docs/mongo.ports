@@ -1,0 +1,5 @@
+mongod:27017
+mongos:27000
+shard1:27001
+shard2:27002
+shard3:27003
