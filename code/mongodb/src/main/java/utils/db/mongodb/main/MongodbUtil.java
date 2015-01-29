@@ -50,6 +50,7 @@ import com.mongodb.WriteResult;
  * $in : in
  * $nin: not in
  * $all: all
+ * $regex: like :{"_id":{"$regex":"reduce"}}
  * $not: 反匹配(1.3.3及以上版本)
  *
  * @author sid
