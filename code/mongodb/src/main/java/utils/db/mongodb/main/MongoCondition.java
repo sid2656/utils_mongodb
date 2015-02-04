@@ -12,8 +12,6 @@ package utils.db.mongodb.main;
 
 /**
  * ClassName:MongoCondition
- * Function: TODO ADD FUNCTION. 
- * Reason:	 TODO ADD REASON. 
  * Date:     2014年12月2日 上午9:01:10 
  * @author   sid
  * @see 	 
@@ -29,7 +27,8 @@ public enum MongoCondition {
 	NE("!=、<>", "$ne"),
 	NIN("not in", "$nin"),
 	ALL("all", "$all"),
-	NOT("反匹配(1.3.3及以上版本)", "$not");  
+	NOT("反匹配(1.3.3及以上版本)", "$not"),  
+	REGEX("like", "$regex");
     // 成员变量  
     private String name;  
     private String val;
