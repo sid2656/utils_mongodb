@@ -1,0 +1,8 @@
+replSet = replset
+dbpath = /usr/local/mongodb2.6.3/mongo_data/replset/data 
+logpath = /usr/local/mongodb2.6.3/mongo_data/replset/logs/mongodb.log 
+logappend = true 
+port = 27002
+maxConns = 800 
+fork = true 
+smallfiles = true

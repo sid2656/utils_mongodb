@@ -1,0 +1,18 @@
+设置系统最大打开文件数量
+
+vi /etc/security/limits.conf
+增加如下两行
+*        -       nproc       102400
+*        -       nofile       102400
+
+修改linux的最大文件句柄数限制的方法：
+1）ulimit -n 65535 
+在当前session有效，用户退出或者系统重新后恢复默认值
+2）修改profile文件：在profile文件中添加：ulimit -n 65535 
+   只对当个用户有效
+3）修改文件：/etc/security/limits.conf，在文件中添加：（立即生效-当前session中运行ulimit -a命令无法显示）
+* soft nofile 32768 #限制单个进程最大文件句柄数（到达此限制时系统报警）  
+* hard nofile 65536 #限制单个进程最大文件句柄数（到达此限制时系统报错）  
+4）修改文件：/etc/sysctl.conf。在文件中添加：
+fs.file-max=655350 #限制整个系统最大文件句柄数  
+运行命令：/sbin/sysctl -p 使配置生效
