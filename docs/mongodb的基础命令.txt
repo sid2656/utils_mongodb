@@ -1,4 +1,4 @@
- MongoDB基本命令用
+MongoDB基本命令用
 
 成功启动MongoDB后，再打开一个命令行窗口输入mongo，就可以进行数据库的一些操作。
 
