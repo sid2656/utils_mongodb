@@ -862,7 +862,7 @@ public class MongodbUtil {
 //        DBObject query = new BasicDBObject("Logtime",
 //                new BasicDBObject("$gte", "20120823").append("$lte", "20120824"));
         MapReduceCommand command = new MapReduceCommand(col, mapFunction, reduceFunction,
-        		resultname, MapReduceCommand.OutputType.MERGE, basic);
+        		resultname, MapReduceCommand.OutputType.INLINE, basic);
         MapReduceOutput out = col.mapReduce(command);  
         return out;
 	}
