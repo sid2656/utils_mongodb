@@ -1,0 +1,2 @@
+#!/bin/sh
+nohup java -server -Xms256m -Xmx2048m -Dfile.encoding=GBK -XX:+UseParallelGC -XX:+AggressiveOpts -XX:+UseFastAccessorMethods -cp ./classes:mapreduce-0.0.1-SNAPSHOT.jar com.hdsx.taxi.upa.mapreduce.App >/dev/null 2>/dev/null &
