@@ -13,9 +13,8 @@ package mapreduce.test;
 import java.util.HashMap;
 import java.util.List;
 
-import com.hdsx.taxi.mongo.MongoCondition;
-import com.hdsx.taxi.mongo.MongodbUtil;
-import com.mongodb.DBObject;
+import utils.db.mongodb.main.MongoCondition;
+import utils.db.mongodb.main.MongodbUtil;
 
 /**
  * ClassName:MongoUtilTest

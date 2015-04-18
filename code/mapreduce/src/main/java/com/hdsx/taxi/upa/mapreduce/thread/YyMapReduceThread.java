@@ -8,7 +8,8 @@ import java.util.Timer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.hdsx.taxi.mongo.utils.DataUtils;
+import utils.utils.DataTypeUtil;
+
 import com.hdsx.taxi.upa.mapreduce.bean.TcpUser;
 import com.hdsx.taxi.upa.mapreduce.service.TcpUserService;
 import com.hdsx.taxi.upa.mapreduce.task.UpdateTask;
@@ -70,7 +71,7 @@ public class YyMapReduceThread extends Thread {
 	 * @param startTime
 	 */
 	private void doBeforeMapReduce(Calendar cal, long startTime) {
-		if (DataUtils.isNotEmpty(MapReduceConfig.getYyStart())
+		if (DataTypeUtil.isNotEmpty(MapReduceConfig.getYyStart())
 				&&!MapReduceConfig.getYyStart().equals(DateUtil.INITTIME)) {
 			try {
 				Date date = DateUtil.strToDate(MapReduceConfig.getYyStart());

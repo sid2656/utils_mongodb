@@ -12,18 +12,19 @@ package mapreduce.test;
 
 import java.util.HashMap;
 
+import junit.framework.TestCase;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.hdsx.taxi.mongo.MongodbUtil;
-import com.hdsx.taxi.mongo.utils.DataUtils;
-import com.hdsx.taxi.mongo.utils.LogUtil;
+import utils.db.mongodb.main.MongodbUtil;
+import utils.utils.DataTypeUtil;
+import utils.utils.LogUtil;
+
 import com.hdsx.taxi.upa.mapreduce.utils.MapReduceConfig;
 import com.hdsx.taxi.upa.mapreduce.utils.MapReduceUtil;
 import com.mongodb.DBObject;
 import com.mongodb.MapReduceOutput;
-
-import junit.framework.TestCase;
 
 /**
  * ClassName:MapReduceTest Function: TODO ADD FUNCTION. Reason: TODO ADD REASON.
@@ -135,7 +136,7 @@ public class MapReduceTest extends TestCase {
 
 			// 2.插入结果集
 			Iterable<DBObject> results = out.results();
-			if (DataUtils.isNotEmpty(results)) {
+			if (DataTypeUtil.isNotEmpty(results)) {
 				System.out.println(results);
 			} else {
 				logger.info("{}时间段：{}----{},数据为空暂不处理", code, start, end);
