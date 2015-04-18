@@ -10,11 +10,6 @@
 
 package mapreduce.test;
 
-import java.util.HashMap;
-
-import com.hdsx.taxi.mongo.MongodbUtil;
-import com.hdsx.taxi.upa.mapreduce.utils.MapReduceConfig;
-
 import junit.framework.TestCase;
 
 /**

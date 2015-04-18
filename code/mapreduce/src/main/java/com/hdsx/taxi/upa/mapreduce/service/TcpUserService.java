@@ -4,8 +4,9 @@ package com.hdsx.taxi.upa.mapreduce.service;
 import java.util.HashMap;
 import java.util.List;
 
-import com.hdsx.taxi.mongo.MongodbUtil;
-import com.hdsx.taxi.mongo.init.InitMongo;
+import utils.db.mongodb.init.InitMongo;
+import utils.db.mongodb.main.MongodbUtil;
+
 import com.hdsx.taxi.upa.mapreduce.bean.TcpUser;
 
 public class TcpUserService {

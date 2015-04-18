@@ -15,9 +15,10 @@ import java.util.HashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.hdsx.taxi.mongo.MongodbUtil;
-import com.hdsx.taxi.mongo.utils.DataUtils;
-import com.hdsx.taxi.mongo.utils.LogUtil;
+import utils.db.mongodb.main.MongodbUtil;
+import utils.utils.DataTypeUtil;
+import utils.utils.LogUtil;
+
 import com.mongodb.DBObject;
 import com.mongodb.MapReduceOutput;
 
@@ -71,7 +72,7 @@ public class MapReduceUtil {
 			
 			//2.插入结果集
 			Iterable<DBObject> results = out.results();
-			if (DataUtils.isNotEmpty(results)) {
+			if (DataTypeUtil.isNotEmpty(results)) {
 				for (DBObject dbObject : results) {
 					MongodbUtil.getInstance().insertMapReduceResult(MapReduceConfig.getYyMapreduce(), 
 							MapReduceConfig.getYyInterval(), dbObject);
