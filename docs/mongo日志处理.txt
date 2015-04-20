@@ -1,0 +1,6 @@
+按天进行分割：
+Linux：
+kill -SIGUSR1 pid
+windows：
+use admin
+db.runCommand({logRotate:1})

@@ -1,7 +1,7 @@
 
 1.导出json：
-mongoexport --host 192.168.5.170 --port 27000 --db database_info --collection t_taxi_userxx --out D:\citydata\20150107_t_taxi_userxx.json  --jsonArray
+mongoexport --host 127.0.0.1 --port 27001 --db findtest --collection find_test --out D:\user.json  --jsonArray
 2.导入json：
-mongoimport --host 192.168.5.170 --port 27000 --db database_info --collection t_taxi_czcqyxx --file D:\citydata\20150107_tz_t_taxi_czcqyxx.json  --jsonArray
+mongoimport --host 127.0.0.1 --port 27001 --db test --collection user --file D:\user.json  --jsonArray
 
 请注意修改ip、端口、db、collection等参数
