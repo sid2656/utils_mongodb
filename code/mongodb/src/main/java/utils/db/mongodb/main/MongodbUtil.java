@@ -50,7 +50,6 @@ import com.mongodb.WriteResult;
  * $in : in
  * $nin: not in
  * $all: all
- * $regex: like :{"_id":{"$regex":"reduce"}}
  * $not: 反匹配(1.3.3及以上版本)
  *
  * @author sid
@@ -59,6 +58,9 @@ public class MongodbUtil {
 	
 	public static final String OR = "$or";
 	public static final String IN = "$in";
+	
+	private static String hashKey = "_id";
+	private static String hashValue="hashed";
 
 	private static MongoClient mg = null;
 	
@@ -147,7 +149,7 @@ public class MongodbUtil {
 		DB admin = mg.getDB("admin");
 		DBObject shard = new BasicDBObject();
 		DBObject key = new BasicDBObject();
-		key.put("_id", "hashed");
+		key.put(hashKey, hashValue);
 		shard.put("shardcollection", databasename+"."+collectionname);
 		shard.put("key", key);
 		CommandResult command = admin.command(shard);
@@ -410,7 +412,13 @@ public class MongodbUtil {
         	writeResult = col.insert(obj);
             result = getWriteResult(result, writeResult);
 		}else{
-			writeResult = col.update(basic, obj);
+			DBCursor find = col.find(basic);
+			while (find.hasNext()) {
+				DBObject findobj = find.next();
+				//获取分片的片键
+	        	basic.append(hashKey, findobj.get(hashKey).toString());
+				writeResult = col.update(basic, obj);
+			}
 		}
         return result;
     }  
@@ -859,10 +867,8 @@ public class MongodbUtil {
 			String reduceFunction,String resultname,HashMap<String, HashMap<String, Object>> map) {
         DBCollection col = this.getCollection(databasename, collectionname);
         BasicDBObject basic = makeCondition(map);
-//        DBObject query = new BasicDBObject("Logtime",
-//                new BasicDBObject("$gte", "20120823").append("$lte", "20120824"));
         MapReduceCommand command = new MapReduceCommand(col, mapFunction, reduceFunction,
-        		resultname, MapReduceCommand.OutputType.MERGE, basic);
+        		resultname, MapReduceCommand.OutputType.INLINE, basic);
         MapReduceOutput out = col.mapReduce(command);  
         return out;
 	}
@@ -879,7 +885,7 @@ public class MongodbUtil {
 	@SuppressWarnings("deprecation")
 	private boolean getWriteResult(boolean result, WriteResult writeResult) {
 		if (null != writeResult) {
-            if (writeResult.getField("ok")!=null&&(Integer)writeResult.getField("ok")>0) {
+            if (writeResult.getField("ok")!=null&&(int)writeResult.getField("ok")>0) {
                 result = true;
             }
         }
