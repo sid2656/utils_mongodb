@@ -14,7 +14,7 @@ public class InitMongo {
 	/**
 	 * 配置文件地址
 	 */
-	private static final String config="/db.properties";
+	private static final String config="db.properties";
 	private static final String charset="utf-8";
 	public static final int SERVER_PORT = Integer.parseInt(PropertiesUtil.getProperties(config, charset).getProperty("mongodb.port"));
 	public static final String SERVER_HOST =PropertiesUtil.getProperties(config, charset).getProperty("mongodb.ip");

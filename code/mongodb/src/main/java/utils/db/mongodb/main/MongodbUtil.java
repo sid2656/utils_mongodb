@@ -17,6 +17,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.bson.types.ObjectId;
+
 import utils.db.mongodb.init.InitMongo;
 import utils.db.mongodb.utils.BeanUtil;
 import utils.utils.DataTypeUtil;
@@ -401,12 +403,7 @@ public class MongodbUtil {
         	obj.put(k, map.get(k));
 		}
         
-        //组合key
-        Set<String> keys = key.keySet();
-        BasicDBObject basic = new BasicDBObject();
-        for (String k : keys) {
-        	basic.append(k, map.get(k));
-		}
+        BasicDBObject basic = makeCondition(key);
         int size = col.find(basic).count();
         if (size==0) {
         	writeResult = col.insert(obj);
@@ -416,8 +413,10 @@ public class MongodbUtil {
 			while (find.hasNext()) {
 				DBObject findobj = find.next();
 				//获取分片的片键
-	        	basic.append(hashKey, findobj.get(hashKey).toString());
-				writeResult = col.update(basic, obj);
+	        	HashMap<String, ObjectId> one = new HashMap<String, ObjectId>();
+	        	one.put(hashKey, new ObjectId(findobj.get(hashKey).toString()));
+	            BasicDBObject basicOne = makeCondition(one);
+				writeResult = col.update(basicOne, obj);
 			}
 		}
         return result;
@@ -557,11 +556,7 @@ public class MongodbUtil {
      */
     public <T> List<T> getBySort(String databasename,String collectionname, 
     		HashMap<String, Object> map, Class<T> clazz,HashMap<String, Object> sort,int limit) {
-		Set<String> keys = map.keySet();
-		BasicDBObject basic = new BasicDBObject();
-		for (String key : keys) {
-			basic.append(key, map.get(key));
-		}
+        BasicDBObject basic = makeCondition(map);
 		return getListBySort(databasename, collectionname, clazz, basic, sort, limit);
     }
   
@@ -636,11 +631,7 @@ public class MongodbUtil {
      * @return
      */
     public int getCount(String databasename,String collectionname, HashMap<String, Object> map) {
-		Set<String> keys = map.keySet();
-		BasicDBObject basic = new BasicDBObject();
-		for (String key : keys) {
-			basic.append(key, map.get(key));
-		}
+        BasicDBObject basic = makeCondition(map);
         try {
 			DBCollection col = this.getCollection(databasename, collectionname);
 			int find = col.find(basic).count();

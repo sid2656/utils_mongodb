@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.bson.types.ObjectId;
+
 import utils.db.mongodb.main.MongodbUtil;
 
 import com.mongodb.BasicDBObject;
@@ -23,15 +25,31 @@ import com.mongodb.ServerAddress;
 public class TestMongoDBShards {
 	public static void main(String[] args) {
 //		shardTest();
-		for (int i=0;i<20;i++) {
-			mongoUtilShardSaveTest(i);
-		}
+//		for (int i=0;i<20;i++) {
+//			mongoUtilShardSaveTest(i);
+//		}
 		
 //		MongodbUtil.getInstance().dropDB("testshard");
 		
 		
 //		mongoUtilTest();
 //		insertTest();
+		
+		updateTest();
+	}
+	private static void updateTest() {
+		HashMap<String, String> map = new HashMap<String, String>();
+//		HashMap<String, Integer> key = new HashMap<String, Integer>();
+//		key.put("xzqhdm", 510100);
+		HashMap<String, String> key = new HashMap<String, String>();
+		key.put("name", "成都1");
+//		HashMap<String, ObjectId> key = new HashMap<String, ObjectId>();
+//		key.put("_id", new ObjectId("54ac958f39079f1d9038a8d8"));
+		map.put("name", "成都1");
+		map.put("qy", "西北2");
+		map.put("sf", "sichuan");
+		MongodbUtil.getInstance().update("auth_test", "auth_test", map, key);
+		
 	}
 	@SuppressWarnings("rawtypes")
 	private static void insertTest() {
