@@ -165,7 +165,7 @@ public class MongodbUtil {
 	 * @author sid
 	 * @return
 	 */
-	public List<String> getDB(){
+	public List<String> getDBs(){
 		List<String> databaseNames = mg.getDatabaseNames();
 		return databaseNames;
 	}
