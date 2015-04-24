@@ -1,0 +1,70 @@
+方法1：
+
+与一个已知的时间服务器同步
+
+
+复制代码
+代码如下:
+ntpdate time.nist.gov
+
+其中 time.nist.gov 是一个时间服务器.
+
+删除本地时间并设置时区为上海
+ 
+
+复制代码
+代码如下:
+rm -rf /etc/localtime
+ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+
+
+方法2：
+linux自动同步时间
+vi /etc/crontab
+加上一句：
+
+
+复制代码
+代码如下:
+00 0 1 * * root rdate -s time.nist.gov
+
+配置时间服务器配置(192.168.10.1)
+ 
+
+复制代码
+代码如下:
+
+1）、# rpm -ivh ntp-4.1.2-4.EL3.1.i386.rpm
+2）、# vi /etc/ntp.conf
+
+注释一行：
+restrict default ignore
+加入一行：
+ 
+
+复制代码
+代码如下:
+restrict 192.168.10.0 mask 255.255.255.0 notrust nomodify notrap
+
+3）、# vi /etc/ntp/step-tickers
+加入一行：
+pool.ntp.org
+这样每次ntpd启动时，会自动连接该国际标准时间服务器；
+
+4）、# service ntpd start
+
+5）、# netstat -an |grep 123
+确保该端口以udp方式开放
+
+时间客户端配置(192.168.10.2)
+1）、# ntpdate 192.168.10.2
+应该显示同步成功
+2）、# crond -e
+加入
+ 
+
+复制代码
+代码如下:
+0-59/10 * * * * /usr/sbin/ntpdate 192.168.10.1
+
+每隔10分钟同步一次时间

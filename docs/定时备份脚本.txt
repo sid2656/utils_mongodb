@@ -1,6 +1,6 @@
-MongodbÓÃµÄÊÇ¿ÉÒÔÈÈ±¸·İµÄmongodumpºÍ¶ÔÓ¦»Ö¸´µÄmongorestore,ÔÚlinuxÏÂÃæÊ¹ÓÃshell½Å±¾Ğ´µÄ¶¨Ê±±¸·İ£¬´úÂëÈçÏÂ
+Mongodbç”¨çš„æ˜¯å¯ä»¥çƒ­å¤‡ä»½çš„mongodumpå’Œå¯¹åº”æ¢å¤çš„mongorestore,åœ¨linuxä¸‹é¢ä½¿ç”¨shellè„šæœ¬å†™çš„å®šæ—¶å¤‡ä»½ï¼Œä»£ç å¦‚ä¸‹
 
-1.¶¨Ê±±¸·İ
+1.å®šæ—¶å¤‡ä»½
 #!/bin/bash
 sourcepath='/usr/local/mongodb2.6.3/bin'
 targetpath='/usr/local/mongodbbak/databases'
@@ -30,29 +30,37 @@ fi
 execute
 echo "============== back end ${nowtime} =============="
 
- 2.¶¨Ê±Çå³ı£¬±£Áô7ÌìµÄ¼ÍÂ¼
+ 2.å®šæ—¶æ¸…é™¤ï¼Œä¿ç•™7å¤©çš„çºªå½•
 #!/bin/bash
 targetpath='/backup/mongobak'
 nowtime=$(date -d '-7 days' "+%Y%m%d")
 if [ -d "${targetpath}/" ]
 then
   rm -rf "${targetpath}/"
-  echo "=======${targetpath}/===É¾³ıÍê±Ï=="
+  echo "=======${targetpath}/===åˆ é™¤å®Œæ¯•=="
 fi
 echo "===$nowtime ==="
 
- 3.·şÎñÆ÷µÄÊ±¼äÒªÍ¬²½£¬Í¬²½µÄ·½·¨
-Î¢Èí¹«Ë¾ÊÚÊ±Ö÷»ú(ÃÀ¹ú)     time.windows.com
-Ì¨¾¯´óÊÚÊ±ÖĞĞÄ(Ì¨Íå)        asia.pool.ntp.org
-ÖĞ¿ÆÔºÊÚÊ±ÖĞĞÄ(Î÷°²)        210.72.145.44
-ÍøÍ¨ÊÚÊ±ÖĞĞÄ(±±¾©)           219.158.14.130
-µ÷ÓÃÍ¬²½£º  ntpdate asia.pool.ntp.org
+ 3.æœåŠ¡å™¨çš„æ—¶é—´è¦åŒæ­¥ï¼ŒåŒæ­¥çš„æ–¹æ³•
+å¾®è½¯å…¬å¸æˆæ—¶ä¸»æœº(ç¾å›½)     time.windows.com
+å°è­¦å¤§æˆæ—¶ä¸­å¿ƒ(å°æ¹¾)        asia.pool.ntp.org
+ä¸­ç§‘é™¢æˆæ—¶ä¸­å¿ƒ(è¥¿å®‰)        210.72.145.44
+ç½‘é€šæˆæ—¶ä¸­å¿ƒ(åŒ—äº¬)           219.158.14.130
+è°ƒç”¨åŒæ­¥ï¼š  
+ntpdate 219.158.14.130
 
-4.ÉèÖÃÉÏÃæ½Å±¾È¨ÏŞºÍ¶¨Ê±ÈÎÎñ
+4.è®¾ç½®ä¸Šé¢è„šæœ¬æƒé™å’Œå®šæ—¶ä»»åŠ¡
 
-È¨ÏŞ:chmod 777 file
-¶¨Ê±ÈÎÎñ:crontab -e 
+æƒé™:chmod 777 file
+å®šæ—¶ä»»åŠ¡:crontab -e 
 00 02 * * * /usr/local/mongodbbak/mongobak.sh 1>/log/crontab_mongo_back.file &
 00 03 * * * /usr/local/mongodbbak/mongobakdelete.sh 1>/log/crontab_mongo_delete.file &
 
- Ã¿ÌìÁè³¿2µã¿ªÊ¼½øĞĞ±¸·İ, 3µãÉ¾³ı¾ÉµÄ±¸·İ
+ æ¯å¤©å‡Œæ™¨2ç‚¹å¼€å§‹è¿›è¡Œå¤‡ä»½, 3ç‚¹åˆ é™¤æ—§çš„å¤‡ä»½
+ 
+ 5.é‡å¯æœåŠ¡
+ ã€€ã€€/sbin/service crond start    //å¯åŠ¨æœåŠ¡
+ã€€ã€€/sbin/service crond stop     //å…³é—­æœåŠ¡
+ã€€ã€€/sbin/service crond restart  //é‡å¯æœåŠ¡
+ã€€ã€€/sbin/service crond reload   //é‡æ–°è½½å…¥é…ç½®
+ã€€ã€€/sbin/service crond status   //æŸ¥çœ‹æœåŠ¡çŠ¶æ€ 
