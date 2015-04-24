@@ -160,6 +160,18 @@ public class MongodbUtil {
 
 	/**
 	 * 
+	 * getDBs:(获取数据库列表). 
+	 *
+	 * @author sid
+	 * @return
+	 */
+	public List<String> getDB(){
+		List<String> databaseNames = mg.getDatabaseNames();
+		return databaseNames;
+	}
+
+	/**
+	 * 
 	 * getDB:(获取数据库). 
 	 *
 	 * @author sid
