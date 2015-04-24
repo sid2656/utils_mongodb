@@ -6,15 +6,16 @@ import java.util.List;
 import java.util.Timer;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import utils.utils.DataTypeUtil;
+import utils.utils.DateUtil;
+import utils.utils.LogUtil;
 
 import com.hdsx.taxi.upa.mapreduce.bean.TcpUser;
 import com.hdsx.taxi.upa.mapreduce.service.TcpUserService;
 import com.hdsx.taxi.upa.mapreduce.task.UpdateTask;
-import com.hdsx.taxi.upa.mapreduce.utils.DateUtil;
 import com.hdsx.taxi.upa.mapreduce.utils.MapReduceConfig;
+import com.hdsx.taxi.upa.mapreduce.utils.MapReducePropertiesUtil;
 import com.hdsx.taxi.upa.mapreduce.utils.MapReduceUtil;
 
 /**
@@ -25,8 +26,8 @@ import com.hdsx.taxi.upa.mapreduce.utils.MapReduceUtil;
  * @author sid
  */
 public class YyMapReduceThread extends Thread {
-	
-	public static Logger logger = LoggerFactory.getLogger(YyMapReduceThread.class);
+
+	private static final Logger logger = LogUtil.getInstance().getLogger(YyMapReduceThread.class);
 	
 	public YyMapReduceThread(String name){
 		super(name);//调用父类带参数的构造方法

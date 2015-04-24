@@ -10,7 +10,7 @@
 
 package mapreduce.test;
 
-import com.hdsx.taxi.upa.mapreduce.utils.DateUtil;
+import utils.utils.DateUtil;
 
 /**
  * ClassName:TimeTest

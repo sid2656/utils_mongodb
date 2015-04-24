@@ -13,7 +13,6 @@ package com.hdsx.taxi.upa.mapreduce.utils;
 import java.util.HashMap;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import utils.db.mongodb.main.MongodbUtil;
 import utils.utils.DataTypeUtil;
@@ -29,7 +28,8 @@ import com.mongodb.MapReduceOutput;
  * @see 	 
  */
 public class MapReduceUtil {
-	private static final Logger logger = LoggerFactory.getLogger(MapReduceUtil.class);
+
+	private static final Logger logger = LogUtil.getInstance().getLogger(MapReduceUtil.class);
 
 	/**
 	 * 营收的MapReduce方法

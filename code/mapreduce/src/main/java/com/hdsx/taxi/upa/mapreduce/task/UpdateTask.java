@@ -6,16 +6,18 @@ import java.util.List;
 import java.util.TimerTask;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import utils.utils.DateUtil;
+import utils.utils.LogUtil;
 
 import com.hdsx.taxi.upa.mapreduce.bean.TcpUser;
 import com.hdsx.taxi.upa.mapreduce.service.TcpUserService;
-import com.hdsx.taxi.upa.mapreduce.utils.DateUtil;
 import com.hdsx.taxi.upa.mapreduce.utils.MapReduceConfig;
 import com.hdsx.taxi.upa.mapreduce.utils.MapReduceUtil;
 
 public class UpdateTask extends TimerTask {
-	private static final Logger logger = LoggerFactory.getLogger(UpdateTask.class);
+
+	private static final Logger logger = LogUtil.getInstance().getLogger(UpdateTask.class);
 	
 	
 	public UpdateTask() {
