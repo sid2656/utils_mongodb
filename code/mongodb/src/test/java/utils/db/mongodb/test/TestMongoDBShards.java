@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import org.bson.types.ObjectId;
-
 import utils.db.mongodb.main.MongodbUtil;
 
 import com.mongodb.BasicDBObject;
@@ -51,7 +49,7 @@ public class TestMongoDBShards {
 		MongodbUtil.getInstance().update("auth_test", "auth_test", map, key);
 		
 	}
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings({ "rawtypes", "unchecked", "unused" })
 	private static void insertTest() {
 		HashMap<String, Object> map1 = new HashMap<String, Object>();
 		map1.put("n01", "00001937");
@@ -67,7 +65,7 @@ public class TestMongoDBShards {
 		System.out.println("当前n01: 00001937查询mySemaphoreTest_mounthOperation操作用时："+time+"毫秒，结果："+insert);
 	}
 
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings({ "rawtypes", "unused" })
 	private static void mongoUtilTest() {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("n01", "00001937");
@@ -78,6 +76,7 @@ public class TestMongoDBShards {
 		System.out.println("当前n01: 00001937查询mySemaphoreTest_mounthOperation操作用时："+time+"毫秒，"+(time/1000)+"秒，结果集："+all.size());
 	}
 
+	@SuppressWarnings("unused")
 	private static void mongoUtilShardTest(int i) {
 		DBCollection coll = MongodbUtil.getInstance().getCollection("testshard", "t_count");
 		BasicDBObject object = new BasicDBObject();
@@ -86,6 +85,7 @@ public class TestMongoDBShards {
 		System.out.println(dbObject);
 	}
 
+	@SuppressWarnings("unused")
 	private static void mongoUtilShardSaveTest(int i) {
 		DBCollection coll = MongodbUtil.getInstance().getCollection("testshard1", "t_count");
 		BasicDBObject object = new BasicDBObject();
@@ -94,6 +94,7 @@ public class TestMongoDBShards {
 		System.out.println(object);
 	}
 
+	@SuppressWarnings("unused")
 	private static void shardTest() {
 		try {
 			List<ServerAddress> addresses = new ArrayList<ServerAddress>();
