@@ -19,11 +19,6 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import org.bson.types.ObjectId;
 
-import utils.db.mongodb.init.InitMongo;
-import utils.db.mongodb.utils.BeanUtil;
-import utils.utils.DataTypeUtil;
-import utils.utils.LogUtil;
-
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.CommandResult;
@@ -36,6 +31,11 @@ import com.mongodb.MapReduceOutput;
 import com.mongodb.MongoClient;
 import com.mongodb.ServerAddress;
 import com.mongodb.WriteResult;
+
+import utils.db.mongodb.init.InitMongo;
+import utils.db.mongodb.utils.BeanUtil;
+import utils.utils.DataTypeUtil;
+import utils.utils.LogUtil;
 
 
 /**
@@ -116,6 +116,42 @@ public class MongodbUtil {
 			}
 		}
 
+//		MongoClientOptions.Builder build = new MongoClientOptions.Builder();
+//		/**
+//		 * 是否连接自动重试
+//		 */
+//		//build.autoConnectRetry(true);
+//
+//		/**
+//		 * 连接数
+//		 */
+//		build.connectionsPerHost(Integer.valueOf(KeegooConfig.mongodbConnectionsCount));
+//
+//		/**
+//		 * 连接超时时间
+//		 */
+//		build.connectTimeout(30000);
+//		/**
+//		 * 最大等待时间
+//		 */
+//		build.maxWaitTime(120000);
+//		/**
+//		 * 保持连接
+//		 */
+//		build.socketKeepAlive(true);
+//		/**
+//		 * 0，不限时间
+//		 */
+//		build.socketTimeout(0);
+//		/**
+//		 * 最大重试时间，单位秒
+//		 */
+//		//build.maxAutoConnectRetryTime(1);
+//
+//		build.threadsAllowedToBlockForConnectionMultiplier(50);
+//		MongoClientOptions mongoClientOptions = build.build();
+//
+//		instance = new MongoClient(Arrays.asList(mongos1, mongos2, mongos3), mongoClientOptions);
 		if (LogUtil.getInstance().getLogger(MongodbUtil.class).isDebugEnabled()) {
 			LogUtil.getInstance().getLogger(MongodbUtil.class).debug("MongodbCollectionManagerUtil() - end"); //$NON-NLS-1$
 		}
